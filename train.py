@@ -37,7 +37,8 @@ from utils.wandb_logging.wandb_utils import WandbLogger, check_wandb_resume
 
 logger = logging.getLogger(__name__)
 
-
+#epochs는 전체 학습 데이터셋을 몇번 반복해서 학습할지 결정하는데, 너무 크면 overfitting될 수 있다
+#batch size는 학습 데이터를 모델에 입력할 때 한 번에 몇개의 이미지를 처리할지 결정한다. 클수록 빠르게 학습하지만 GPU메모리에 따라 한계가 올 수 있다
 def train(hyp, opt, device, tb_writer=None):
     logger.info(colorstr('hyperparameters: ') + ', '.join(f'{k}={v}' for k, v in hyp.items()))
     save_dir, epochs, batch_size, total_batch_size, weights, rank, freeze = \
