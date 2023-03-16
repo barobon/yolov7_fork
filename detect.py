@@ -153,7 +153,7 @@ def detect(save_img=False):
             if save_img:
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
-                    print(f" The image with the result is saved in: {save_path}")
+                    #print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
                     if vid_path != save_path:  # new video
                         vid_path = save_path
@@ -170,6 +170,8 @@ def detect(save_img=False):
                     vid_writer.write(im0)
 
     if save_txt or save_img:
+        #입력 유형이 무엇이든 안내 텍스트를 출력하기 위해 위의 코드를 주석 처리하고 여기로 옮김
+        print(f" The output with the result is saved in: {save_path}")
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
         #print(f"Results saved to {save_dir}{s}")
 
