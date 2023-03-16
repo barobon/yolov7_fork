@@ -14,6 +14,8 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
+#각 클래스마다 할당되는 색깔의 정보를 고정한다.
+#random.seed(1)
 
 def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
@@ -132,6 +134,17 @@ def detect(save_img=False):
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
             # Stream results
+            """
+            # 입력 데이터가 동영상일 때 fps을 달아주는 코드
+            startTime = 0
+            if dataset.mode != 'image':
+                currentTime = time.time()
+                
+                fps = 1/(currentTime - startTime)
+                startTime = currentTime
+                
+                cv2.putText(im0, "FPS: " + str(int(fps)), (20, 70), cv2.FONT_HERSEY_PLAIN, 2, (0,255,0), 2)
+            """
             if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
